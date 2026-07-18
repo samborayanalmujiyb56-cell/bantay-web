@@ -23,8 +23,17 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
 });
 
 // Farmer-only routes
+
 Route::middleware(['auth:sanctum', 'farmer'])->group(function () {
     Route::get('/farmer/ping', function () {
         return response()->json(['message' => 'You are a farmer.']);
     });
-});
+
+    Route::get('/farms', [\App\Modules\FarmManagement\Controllers\FarmController::class, 'index']);
+    Route::post('/farms', [\App\Modules\FarmManagement\Controllers\FarmController::class, 'store']);
+    Route::put('/farms/{farm}', [\App\Modules\FarmManagement\Controllers\FarmController::class, 'update']);
+    Route::post('/farms/{farm}/production', [\App\Modules\FarmManagement\Controllers\FarmController::class, 'addProduction']);
+
+
+        
+    });

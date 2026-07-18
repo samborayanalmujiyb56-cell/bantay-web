@@ -27,6 +27,11 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public function farms()
+{
+    return $this->hasMany(Farm::class);
+}
+
     protected function casts(): array
     {
         return [
