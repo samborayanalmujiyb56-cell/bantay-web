@@ -6,9 +6,28 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class DiseaseImage extends Model
+class DiseaseReport extends Model
 {
-    protected $fillable = ['farm_id', 'user_id', 'image_path'];
+    protected $table = "disease_reports";
+
+    protected $fillable = [
+        "farm_id",
+        "user_id",
+        "report_type",
+        "status",
+        "image_path",
+        "latitude",
+        "longitude",
+        "notes",
+    ];
+
+    protected function casts(): array
+    {
+        return [
+            "latitude" => "decimal:7",
+            "longitude" => "decimal:7",
+        ];
+    }
 
     public function farm(): BelongsTo
     {

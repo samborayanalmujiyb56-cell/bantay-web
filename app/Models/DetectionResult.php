@@ -7,15 +7,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class DetectionResult extends Model
 {
-    protected $fillable = ['disease_image_id', 'disease', 'confidence', 'severity', 'model_status'];
+    protected $fillable = ["disease_report_id", "disease", "confidence", "severity", "model_status"];
 
     protected function casts(): array
     {
-        return ['confidence' => 'decimal:4'];
+        return ["confidence" => "decimal:4"];
     }
 
-    public function diseaseImage(): BelongsTo
+    public function diseaseReport(): BelongsTo
     {
-        return $this->belongsTo(DiseaseImage::class);
+        return $this->belongsTo(DiseaseReport::class);
     }
 }

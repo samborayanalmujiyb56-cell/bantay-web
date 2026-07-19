@@ -33,7 +33,7 @@ Route::middleware(['auth:sanctum', 'farmer'])->group(function () {
     Route::post('/farms', [\App\Modules\FarmManagement\Controllers\FarmController::class, 'store']);
     Route::put('/farms/{farm}', [\App\Modules\FarmManagement\Controllers\FarmController::class, 'update']);
     Route::post('/farms/{farm}/production', [\App\Modules\FarmManagement\Controllers\FarmController::class, 'addProduction']);
-
-Route::post('/detect', [\App\Modules\DiseaseDetection\Controllers\DiseaseDetectionController::class, 'detect']);
+    Route::post('/detect', [\App\Modules\DiseaseDetection\Controllers\DiseaseDetectionController::class, 'detect']);
+    Route::post('/reports/manual', [\App\Modules\DiseaseDetection\Controllers\DiseaseDetectionController::class, 'manualReport']);
         
     });
