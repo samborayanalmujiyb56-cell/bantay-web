@@ -11,7 +11,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', fn () => view('dashboard'))->name('dashboard');
 
     Route::get('/farmers', fn () => view('stub', ['title' => 'Farmers & Farms', 'phase' => 'Phase 6']))->name('farmers.index');
-    Route::get('/reports', fn () => view('stub', ['title' => 'Disease Reports', 'phase' => 'Phase 6']))->name('reports.index');
+   Route::get('/reports', [App\Http\Controllers\ReportController::class, 'index'])->name('reports.index');
+Route::post('/reports/{report}/validate', [App\Http\Controllers\ReportController::class, 'validateReport'])->name('reports.validate');
+Route::post('/reports/{report}/reject', [App\Http\Controllers\ReportController::class, 'reject'])->name('reports.reject');
     Route::get('/surveillance', fn () => view('stub', ['title' => 'Surveillance Map', 'phase' => 'Phase 7']))->name('surveillance.map');
     Route::get('/advisories', fn () => view('stub', ['title' => 'Advisories', 'phase' => 'Phase 7']))->name('advisories.index');
     Route::get('/analytics', fn () => view('stub', ['title' => 'Analytics', 'phase' => 'Phase 9']))->name('analytics.index');
