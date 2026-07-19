@@ -3,7 +3,7 @@
 namespace App\Modules\DiseaseDetection\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\DetectionResult;
+use App\Models\DetectionResult;   
 use App\Models\DiseaseImage;
 use App\Models\Farm;
 use App\Modules\DiseaseDetection\Services\AiDetectionClient;
