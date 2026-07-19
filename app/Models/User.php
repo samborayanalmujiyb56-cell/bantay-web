@@ -32,6 +32,11 @@ class User extends Authenticatable
     return $this->hasMany(Farm::class);
 }
 
+    public function notifications()
+{
+    return $this->hasMany(Notification::class);
+}
+
     protected function casts(): array
     {
         return [
