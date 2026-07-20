@@ -38,4 +38,5 @@ Route::middleware(['auth:sanctum', 'farmer'])->group(function () {
     Route::get('/reports/history', [\App\Modules\DiseaseDetection\Controllers\DiseaseDetectionController::class, 'history']);
     Route::get('/notifications', [\App\Modules\Auth\Controllers\NotificationController::class, 'index']);
     Route::post('/notifications/{notification}/read', [\App\Modules\Auth\Controllers\NotificationController::class, 'markRead']);
+    Route::get('/advisories', [\App\Modules\Auth\Controllers\AdvisoryApiController::class, 'index']);
     });
