@@ -8,7 +8,7 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', fn () => view('dashboard'))->name('dashboard');
+Route::get('/dashboard', [App\Http\Controllers\AnalyticsController::class, 'index'])->name('dashboard');
 
     Route::get('/farmers', fn () => view('stub', ['title' => 'Farmers & Farms', 'phase' => 'Phase 6']))->name('farmers.index');
    Route::get('/reports', [App\Http\Controllers\ReportController::class, 'index'])->name('reports.index');
