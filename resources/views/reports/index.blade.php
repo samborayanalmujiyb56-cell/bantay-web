@@ -63,10 +63,26 @@
                                         {{ ucfirst($report->detectionResult->severity) }} severity
                                     </span>
                                 @endif
+
+                                @if ($report->admin_diagnosis)
+                                    <span class="rounded-full bg-blue-50 px-3 py-1 font-medium text-blue-700">
+                                        MAO diagnosis: {{ ucwords(str_replace('_', ' ', $report->admin_diagnosis)) }}
+                                    </span>
+                                @endif
                             </div>
 
                             @if ($report->report_type === 'manual' && $report->notes)
-                                <p class="mt-3 text-sm text-bantay-700">{{ $report->notes }}</p>
+                                <div class="mt-3 rounded-lg bg-gray-50 p-3">
+                                    <p class="text-xs font-medium text-bantay-500 mb-1">Farmer's observation:</p>
+                                    <p class="text-sm text-bantay-700">{{ $report->notes }}</p>
+                                </div>
+                            @endif
+
+                            @if ($report->admin_notes)
+                                <div class="mt-2 rounded-lg bg-blue-50 p-3">
+                                    <p class="text-xs font-medium text-blue-500 mb-1">MAO note:</p>
+                                    <p class="text-sm text-blue-800">{{ $report->admin_notes }}</p>
+                                </div>
                             @endif
 
                             <p class="mt-2 text-xs text-bantay-400">
@@ -74,16 +90,46 @@
                             </p>
 
                             @if ($report->status === 'pending')
-                                <div class="mt-4 flex gap-2">
-                                    <form method="POST" action="{{ route('reports.validate', $report) }}">
+                                <div class="mt-4 rounded-lg border border-bantay-100 bg-bantay-50 p-4">
+                                    <form method="POST" action="{{ route('reports.validate', $report) }}" class="space-y-3">
                                         @csrf
-                                        <button type="submit"
-                                                class="rounded-lg bg-bantay-600 px-4 py-2 text-xs font-medium text-white hover:bg-bantay-700 transition">
-                                            Validate
-                                        </button>
+
+                                        @if ($report->report_type === 'manual')
+                                            <div>
+                                                <label class="mb-1 block text-xs font-medium text-bantay-700">
+                                                    Diagnosis (required for manual reports)
+                                                </label>
+                                                <select name="admin_diagnosis" required
+                                                        class="w-full rounded-lg border border-bantay-200 px-3 py-2 text-sm">
+                                                    <option value="">Select a diagnosis...</option>
+                                                    @foreach ($diseaseOptions as $option)
+                                                        <option value="{{ $option }}">{{ ucwords(str_replace('_', ' ', $option)) }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        @endif
+
+                                        <div>
+                                            <label class="mb-1 block text-xs font-medium text-bantay-700">
+                                                Additional note to farmer (optional)
+                                            </label>
+                                            <textarea name="admin_notes" rows="2"
+                                                      class="w-full rounded-lg border border-bantay-200 px-3 py-2 text-sm"
+                                                      placeholder="e.g. Please isolate the affected plant and monitor nearby trees..."></textarea>
+                                        </div>
+
+                                        <div class="flex gap-2">
+                                            <button type="submit"
+                                                    class="rounded-lg bg-bantay-600 px-4 py-2 text-xs font-medium text-white hover:bg-bantay-700 transition">
+                                                Validate & Notify Farmer
+                                            </button>
+                                        </div>
                                     </form>
-                                    <form method="POST" action="{{ route('reports.reject', $report) }}">
+
+                                    <form method="POST" action="{{ route('reports.reject', $report) }}" class="mt-2">
                                         @csrf
+                                        <input type="text" name="admin_notes" placeholder="Reason for rejection (optional)"
+                                               class="mb-2 w-full rounded-lg border border-bantay-200 px-3 py-2 text-sm" />
                                         <button type="submit"
                                                 class="rounded-lg border border-red-200 bg-white px-4 py-2 text-xs font-medium text-red-600 hover:bg-red-50 transition">
                                             Reject

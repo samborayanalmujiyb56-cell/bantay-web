@@ -19,6 +19,8 @@ class DiseaseReport extends Model
         "latitude",
         "longitude",
         "notes",
+        "admin_diagnosis",
+        "admin_notes",
     ];
 
     protected function casts(): array
