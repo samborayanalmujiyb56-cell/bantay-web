@@ -3,15 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'BANTAY') — MAO Dashboard</title>
+    <title>@yield('title', 'BANTAY') - MAO Dashboard</title>
     <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="h-full bg-bantay-50 font-sans antialiased text-bantay-900">
     <div class="flex h-full">
 
-        {{-- Sidebar --}}
-        <aside class="flex w-64 flex-col bg-white border-r border-bantay-100">
+        <aside class="relative flex w-64 flex-col overflow-hidden bg-white border-r border-bantay-100">
+            <div class="absolute inset-0 -z-10">
+                <img src="{{ asset('images/mao-logo.png') }}" alt=""
+                     class="h-full w-full object-cover opacity-[0.06]" />
+            </div>
+
             <div class="flex items-center gap-3 px-6 py-6">
                 <x-logo class="w-9 h-9" />
                 <div class="leading-tight">
@@ -28,7 +32,6 @@
                         ['route' => 'reports.index', 'pattern' => 'reports.*', 'icon' => 'leaf', 'label' => 'Disease Reports'],
                         ['route' => 'surveillance.map', 'pattern' => 'surveillance.*', 'icon' => 'map', 'label' => 'Surveillance Map'],
                         ['route' => 'advisories.index', 'pattern' => 'advisories.*', 'icon' => 'megaphone', 'label' => 'Advisories'],
-                        
                     ];
                 @endphp
 
@@ -64,9 +67,13 @@
             </div>
         </aside>
 
-        {{-- Main content --}}
         <div class="flex flex-1 flex-col overflow-hidden">
-            <header class="flex items-center justify-between border-b border-bantay-100 bg-white px-8 py-5">
+            <header class="relative flex items-center justify-between overflow-hidden border-b border-bantay-100 bg-white px-8 py-5">
+                <div class="absolute inset-0 -z-10">
+                    <img src="{{ asset('images/mao-logo.png') }}" alt=""
+                         class="h-full w-full object-cover opacity-[0.06]" />
+                </div>
+
                 <div>
                     <h1 class="text-xl font-semibold text-bantay-900">@yield('title', 'Dashboard')</h1>
                     <p class="text-sm text-bantay-500">@yield('subtitle', 'Municipal Agriculture Office')</p>
