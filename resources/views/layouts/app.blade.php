@@ -27,7 +27,7 @@
                         ['route' => 'reports.index', 'pattern' => 'reports.*', 'icon' => 'leaf', 'label' => 'Disease Reports'],
                         ['route' => 'surveillance.map', 'pattern' => 'surveillance.*', 'icon' => 'map', 'label' => 'Surveillance Map'],
                         ['route' => 'advisories.index', 'pattern' => 'advisories.*', 'icon' => 'megaphone', 'label' => 'Advisories'],
-                        ['route' => 'analytics.index', 'pattern' => 'analytics.*', 'icon' => 'chart', 'label' => 'Analytics'],
+                        
                     ];
                 @endphp
 

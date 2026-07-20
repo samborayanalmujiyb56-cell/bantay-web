@@ -16,8 +16,10 @@ Route::get('/dashboard', [App\Http\Controllers\AnalyticsController::class, 'inde
     Route::post('/reports/{report}/validate', [App\Http\Controllers\ReportController::class, 'validateReport'])->name('reports.validate');
     Route::post('/reports/{report}/reject', [App\Http\Controllers\ReportController::class, 'reject'])->name('reports.reject');
     Route::get('/surveillance', [App\Http\Controllers\SurveillanceController::class, 'map'])->name('surveillance.map');
-    Route::get('/advisories', fn () => view('stub', ['title' => 'Advisories', 'phase' => 'Phase 7']))->name('advisories.index');
-    Route::get('/analytics', fn () => view('stub', ['title' => 'Analytics', 'phase' => 'Phase 9']))->name('analytics.index');
+    Route::get('/advisories', [App\Http\Controllers\AdvisoryController::class, 'index'])->name('advisories.index');
+    Route::post('/advisories', [App\Http\Controllers\AdvisoryController::class, 'store'])->name('advisories.store');
+    Route::delete('/advisories/{advisory}', [App\Http\Controllers\AdvisoryController::class, 'destroy'])->name('advisories.destroy');
+   
 });
 
 Route::get('/', fn () => redirect()->route('login'));
