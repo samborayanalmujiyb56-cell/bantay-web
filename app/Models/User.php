@@ -28,14 +28,19 @@ class User extends Authenticatable
     ];
 
     public function farms()
-{
-    return $this->hasMany(Farm::class);
-}
+    {
+        return $this->hasMany(Farm::class);
+    }
 
     public function notifications()
-{
-    return $this->hasMany(Notification::class);
-}
+    {
+        return $this->hasMany(Notification::class);
+    }
+
+    public function diseaseReports()
+    {
+        return $this->hasMany(DiseaseReport::class);
+    }
 
     protected function casts(): array
     {
