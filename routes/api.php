@@ -35,6 +35,7 @@ Route::middleware(['auth:sanctum', 'farmer'])->group(function () {
     Route::post('/farms/{farm}/production', [\App\Modules\FarmManagement\Controllers\FarmController::class, 'addProduction']);
     Route::post('/detect', [\App\Modules\DiseaseDetection\Controllers\DiseaseDetectionController::class, 'detect']);
     Route::post('/reports/manual', [\App\Modules\DiseaseDetection\Controllers\DiseaseDetectionController::class, 'manualReport']);
+    Route::get('/reports/history', [\App\Modules\DiseaseDetection\Controllers\DiseaseDetectionController::class, 'history']);
     Route::get('/notifications', [\App\Modules\Auth\Controllers\NotificationController::class, 'index']);
     Route::post('/notifications/{notification}/read', [\App\Modules\Auth\Controllers\NotificationController::class, 'markRead']);
     });

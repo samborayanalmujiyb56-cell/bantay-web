@@ -16,6 +16,16 @@ class DiseaseDetectionController extends Controller
     {
     }
 
+    public function history(Request $request)
+    {
+        $reports = DiseaseReport::with(["farm", "detectionResult"])
+            ->where("user_id", $request->user()->id)
+            ->latest()
+            ->get();
+
+        return response()->json($reports);
+    }
+
     public function detect(Request $request)
     {
         $validator = Validator::make($request->all(), [
